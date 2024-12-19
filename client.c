@@ -6,11 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:38:03 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/19 21:25:33 by yaait-am         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:43:34 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
+#include "minitalk.h"
 
 int	g_ddd = 0;
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		ft_printf("Usage: %s <server_pid> <message>\n", av[0]);
+		write(1, "Usage: ./client <server_pid> <message>\n",40);
 		return (1);
 	}
 	pid = ft_atoi(av[1]);
