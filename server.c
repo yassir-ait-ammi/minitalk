@@ -6,20 +6,17 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:42:08 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/19 20:18:53 by yaait-am         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:28:27 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include "ft_printf/ft_printf.h"
 
 void	handle_signal(int sig, siginfo_t *info, void *context)
 {
-	static char c = 0;
-	static int numbit = 0;
+	static char	c;
+	static int	numbit;
+
 	(void) context;
 	if (sig == SIGUSR1)
 		c |= (1 << numbit);
@@ -38,15 +35,16 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 	kill(info->si_pid, SIGUSR1);
 }
 
-int main(void)
+int	main(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
+
 	sa.sa_sigaction = handle_signal;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	printf("this the pid : %d\nwaiting for signal...\n", getpid());
+	ft_printf("this the pid : %d\nwaiting for signal...\n", getpid());
 	while (1)
 		pause();
-	return(0);
+	return (0);
 }

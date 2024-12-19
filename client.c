@@ -6,17 +6,13 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:38:03 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/19 20:19:03 by yaait-am         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:25:33 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "ft_printf/ft_printf.h"
 
-int g_ddd = 0;
+int	g_ddd = 0;
 
 void	handle_ack(int sig)
 {
@@ -26,7 +22,8 @@ void	handle_ack(int sig)
 
 void	send_mess(int pid, char c)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < 8)
 	{
@@ -36,20 +33,26 @@ void	send_mess(int pid, char c)
 			kill(pid, SIGUSR2);
 		while (g_ddd == 0)
 			pause();
+		usleep(100);
 		g_ddd = 0;
 		i++;
 	}
 }
 
-int main(int ac, char **av) {
+int	main(int ac, char **av)
+{
+	int		pid;
+	char	*s;
+	int		i;
+
 	if (ac != 3)
 	{
-		printf("Usage: %s <server_pid> <message>\n", av[0]);
+		ft_printf("Usage: %s <server_pid> <message>\n", av[0]);
 		return (1);
 	}
-	int pid = atoi(av[1]);
-	char *s = av[2];
-	int i = 0;
+	pid = ft_atoi(av[1]);
+	s = av[2];
+	i = 0;
 	signal(SIGUSR1, handle_ack);
 	while (s[i])
 	{
@@ -57,5 +60,5 @@ int main(int ac, char **av) {
 		i++;
 	}
 	send_mess(pid, '\0');
-	return(0);
+	return (0);
 }
