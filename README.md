@@ -19,7 +19,7 @@
 . copy the pid
 
 
-. int th second run "./client pid 'the message that you want to send to the server'"
+. in the second run "./client pid 'the message that you want to send to the server'"
 
 
 
