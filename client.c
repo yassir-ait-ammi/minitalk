@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 20:38:03 by yaait-am          #+#    #+#             */
-/*   Updated: 2024/12/26 10:04:42 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/02/19 09:43:42 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,8 @@ int	main(int ac, char **av)
 	pid = ft_atoi(av[1]);
 	s = av[2];
 	i = 0;
-	if (pid < -1)
-		handel_kill();
 	if (pid == -1)
-	{
-		write (1, "wax nta baghi tfih ?\n", 21);
-		return (1);
-	}
+		return (write (1, "wax nta baghi tfih ?\n", 21), 1);
 	signal(SIGUSR1, handle_ack);
 	signal(SIGUSR2, handle_ack);
 	while (s[i])
